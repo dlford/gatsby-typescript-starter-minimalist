@@ -10,18 +10,12 @@ export interface LayoutProps {
   location: Location
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, location }) => {
-  const shouldShowBigHeader: boolean = (() => {
-    return location.pathname === '/'
-  })()
-
-  return (
-    <div className='page-wrapper'>
-      <Header {...{ shouldShowBigHeader }} />
-      <main>{children}</main>
-      <Footer />
-    </div>
-  )
-}
+const Layout = ({ children, location }: LayoutProps) => (
+  <div className='page-wrapper'>
+    <Header shouldShowBigHeader={location.pathname === '/'} />
+    <main>{children}</main>
+    <Footer />
+  </div>
+)
 
 export default Layout
