@@ -12,7 +12,12 @@ export interface LayoutProps {
 
 const Layout = ({ children, location }: LayoutProps) => (
   <div className='page-wrapper'>
-    <Header shouldShowBigHeader={location.pathname === '/'} />
+    <Header
+      shouldShowBigHeader={
+        location.pathname === '/' ||
+        location.pathname === '/gatsby-typescript-starter-minimalist/'
+      }
+    />
     <main>{children}</main>
     <Footer />
   </div>

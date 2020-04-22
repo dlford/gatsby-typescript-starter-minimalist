@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^7.19.0",
     "gh-pages": "^2.2.0",
     "prettier": "2.0.4",
+    "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
   },
   "keywords": [
@@ -49,7 +50,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint --ignore-path .gitignore --fix . --ext ts --ext tsx --ext js --ext jsx",
-    "deploy:github": "gh-pages -d public",
+    "deploy:github": "rimraf node_modules/gh-pages/.cache && gatsby build --prefix-paths && gh-pages -d public",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
