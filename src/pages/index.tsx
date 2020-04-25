@@ -7,6 +7,9 @@ import ReadMe from '~/components/read-me'
 
 export interface IndexPageProps {
   location: Location
+}
+
+interface QueryProps extends IndexPageProps {
   data: {
     site: {
       siteMetadata: {
@@ -16,7 +19,17 @@ export interface IndexPageProps {
   }
 }
 
-const IndexPage = ({ data, location }: IndexPageProps) => {
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
+
+const IndexPage = ({ data, location }: QueryProps) => {
   const title: string = data.site.siteMetadata.title
 
   return (
@@ -30,13 +43,3 @@ const IndexPage = ({ data, location }: IndexPageProps) => {
 }
 
 export default IndexPage
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

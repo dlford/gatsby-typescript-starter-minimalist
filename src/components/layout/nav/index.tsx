@@ -3,10 +3,18 @@ import { graphql, useStaticQuery, Link } from 'gatsby'
 
 import css from './nav.module.css'
 
-export interface NavItem {
-  title: string
-  url: string
-  isRelative: boolean
+type QueryProps = {
+  site: {
+    siteMetadata: {
+      navItems: [
+        {
+          title: string
+          url: string
+          isRelative: string
+        },
+      ]
+    }
+  }
 }
 
 const NAV_ITEMS_QUERY = graphql`
@@ -24,8 +32,8 @@ const NAV_ITEMS_QUERY = graphql`
 `
 
 const Nav = () => {
-  const data = useStaticQuery(NAV_ITEMS_QUERY)
-  const navItems: NavItem[] = data.site.siteMetadata.navItems
+  const data = useStaticQuery<QueryProps>(NAV_ITEMS_QUERY)
+  const navItems = data.site.siteMetadata.navItems
   return (
     <ul className={css.navWrapper}>
       {navItems.map((item, idx) => {

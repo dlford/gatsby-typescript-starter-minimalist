@@ -5,16 +5,16 @@ import LogoImage from '~/images/logo'
 import Nav from '~/components/layout/nav'
 import css from './header.module.css'
 
-export interface SiteMetadata {
+export interface HeaderProps {
+  shouldShowBigHeader: boolean
+}
+
+type QueryProps = {
   site: {
     siteMetadata: {
       title: string
     }
   }
-}
-
-export interface HeaderProps {
-  shouldShowBigHeader: boolean
 }
 
 const HEADER_QUERY = graphql`
@@ -28,7 +28,7 @@ const HEADER_QUERY = graphql`
 `
 
 const Header = ({ shouldShowBigHeader }: HeaderProps) => {
-  const data: SiteMetadata = useStaticQuery(HEADER_QUERY)
+  const data = useStaticQuery<QueryProps>(HEADER_QUERY)
   const { title } = data.site.siteMetadata
 
   return (
